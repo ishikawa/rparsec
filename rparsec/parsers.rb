@@ -1,4 +1,5 @@
 require 'rparsec/parser'
+require 'rparsec/algebraic_data'
 
 module RParsec
 
@@ -611,12 +612,19 @@ class GetIndexParser < Parser
     ctxt.retn(ctxt.index)
   end
 end
+
 class SetIndexParser < Parser
   init :index
   def _parse ctxt
     ctxt.index = @index
   end
 end
+
+class PermutationParser < Parser
+  class Choice 
+    
+  end
+end 
 
 Nil = ValueParser.new(nil)
 
