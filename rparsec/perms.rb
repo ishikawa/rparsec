@@ -11,13 +11,20 @@ module RParsec
       if @choice == [] then 
         @choice = [Branch.new(PTree.new, elem)]
       else
-        choice  = Marshal.load(Marshal.dump(@choice) )
+        choice  = Marshal.load(Marshal.dump(@choice) ) #make a deep copy
         @choice = [Branch.new(PTree.new(@choice), elem)] + (others choice, elem)
       end
 
       return self 
     end
 
+    def add_elems(elems)
+      elems.map { |elem| self.add elem }
+    end
+
+    def num_elems
+      @choice.length
+    end
 
     def others(chs, elem)
       chs.map! do |branch|
@@ -39,5 +46,6 @@ module RParsec
     end
 
   end
+
 
 end 
