@@ -1,5 +1,4 @@
 require 'rparsec/parser'
-require 'rparsec/algebraic_data'
 
 module RParsec
 
