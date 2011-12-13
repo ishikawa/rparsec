@@ -1,9 +1,11 @@
-require_relative "perms"
-require "test/unit"
+require_relative 'perms'
+require 'test/unit'
+
+include RParsec 
 
 class TestPTree < Test::Unit::TestCase
 
-  def test_should_add_new_branch_to_empty_PTree
+  def test_add_elem_should_add_new_branch_to_ptree
     ptree = PTree.new()
     ptree.add "elem"
  
