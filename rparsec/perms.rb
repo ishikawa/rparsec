@@ -1,37 +1,43 @@
-class PTree
-  attr_reader :choice
-  
-  def initialize(choice = nil)
-    @choice = choice ? choice : []    
-  end
+module RParsec
 
-  def add(elem)
-    if @choice == [] then 
-      @choice = [Branch.new(PTree.new, elem)]
-    else
-      choice  = Marshal.load(Marshal.dump(@choice) )
-      @choice = [Branch.new(PTree.new(@choice), elem)] + (others choice, elem)
+  class PTree
+    attr_reader :choice
+    
+    def initialize(choice = nil)
+      @choice = choice ? choice : []    
     end
 
-    return self 
-  end
+    def add(elem)
+      if @choice == [] then 
+        @choice = [Branch.new(PTree.new, elem)]
+      else
+        choice  = Marshal.load(Marshal.dump(@choice) )
+        @choice = [Branch.new(PTree.new(@choice), elem)] + (others choice, elem)
+      end
 
-  def others(chs, elem)
-    chs.map! do |branch|
-      Branch.new (branch.ptree.add elem), branch.elem
-    end   
-  end
+      return self 
+    end
+
+
+    def others(chs, elem)
+      chs.map! do |branch|
+        Branch.new (branch.ptree.add elem), branch.elem
+      end   
+    end
+
+    private :others
  
-end 
+  end 
 
-class Branch 
-  attr_accessor :ptree
-  attr_reader   :elem
+  class Branch 
+    attr_accessor :ptree
+    attr_reader   :elem
+    
+    def initialize (ptree, elem)
+      @elem   = elem
+      @ptree  = ptree 
+    end
 
-  def initialize (ptree, elem)
-    @elem   = elem
-    @ptree  = ptree 
   end
 
-end
-
+end 
