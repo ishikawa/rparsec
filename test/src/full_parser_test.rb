@@ -78,10 +78,10 @@ class FullParserTest < ParserTestCase
     verify('2*15/-(5- -2) #this is test')
   end
   def testSimpleCaseWhen
-    verify('case 1 when 1: 0 else 1 end')
+    verify('case 1 when 1 then 0 else 1 end')
   end
   def testSimpleCaseWhenWithRegularCalc
-    verify('case 1 when 1*1: (1-2) when 3:4 end+1')
+    verify('case 1 when 1*1 then (1-2) when 3:4 end+1')
   end
   def testFullCaseWhen
       assertParser('3*case when 1==0 and 1==1: 1 when 1==1 : 2 end', 6, parser)

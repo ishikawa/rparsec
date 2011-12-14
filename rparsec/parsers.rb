@@ -372,7 +372,7 @@ class AreParser < Parser
 end
 
 def downcase c
-  case when c >= ?A && c <=?Z then c + (?a - ?A) else c end
+  case when c >= ?A && c <=?Z then (c.ord + (?a.ord - ?A.ord)).chr else c end
 end
 
 class StringCaseInsensitiveParser < Parser

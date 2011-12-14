@@ -32,7 +32,7 @@ class SimpleParserTest < ParserTestCase
   end
   def testMap
     assertParser('', 2, value(1).map{|x|x*2})
-    relative = Proc.new{|x|x-?a}
+    relative = Proc.new{|x|(x.ord - ?a.ord)}
     assertParser('b', 1, char('b').map(&relative))
   end
   def testMapOnFailFails
@@ -75,7 +75,7 @@ class SimpleParserTest < ParserTestCase
   def testSequence
     assertParser('abc', ?c, sequence(char(?a),char('b'),char('c')))
     a = ?a
-    relative = proc {|c|c-a}
+    relative = proc {|c|(c.ord - a.ord).chr}
     parser = sequence(
       char('c').map(&relative), 
       char('b').map(&relative), 
@@ -374,7 +374,7 @@ class SimpleParserTest < ParserTestCase
     assertParser('abc', [?a,?a,?a], parser.repeat(3))
   end
   def testMapn
-    assertParser('abc', ?b, any.repeat(3).mapn{|a,b,c|c-b+a})
+    assertParser('abc', ?b, any.repeat(3).mapn{|a,b,c| (c.ord - b.ord + a.ord).chr })
   end
   def testWatch
     i = nil
@@ -392,14 +392,14 @@ class SimpleParserTest < ParserTestCase
     assertParser('abc', ?b, any.repeat_(2) >> watch);
   end
   def testMapCurrent
-    assertParser('abc', ?b, any >> map{|x|x+1})
+    assertParser('abc', ?b, any >> map{|x|x.succ})
     assertParser('abc', ?a, any >> map)
     assertParser('abc', ?a, any.map)
     assertParser('abc', ?a, any.mapn)
   end
   def testMapnCurrent
     assertParser('abc', ?a, any.repeat(2) >> mapn{|a,_|a})
-    assertParser('abc', ?c, any.repeat_(2) >> mapn(&Inc))
+    assertParser('abc', ?c, any.repeat_(2) >> mapn(&Succ))
     assertParser('abc', [?a,?b], any.repeat(2) >> mapn)
   end
   def verifyTypeMismatch(mtd, n, expected, actual)
