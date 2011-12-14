@@ -23,6 +23,6 @@ class KeywordTestCase < ParserTestCase
   def testBasics
     assert(!Insensitive.case_sensitive?)
     assert(Sensitive.case_sensitive?)
-    assert(:keyword, Sensitive.keyword_symbol)
+    assert_equal(:keyword, Sensitive.keyword_symbol)
   end
 end
