@@ -182,7 +182,7 @@ module SqlParser
     lazy_relation = lazy{relation}
     term_relation = word {|w|TableRelation.new w} | operator['('] >> lazy_relation << operator[')']
     sub_relation = sequence(term_relation, (keyword[:as].optional >> word).optional) do |rel, name|
-      case when name.nil?: rel else AliasRelation.new(rel, name) end
+      case when name.nil? then rel else AliasRelation.new(rel, name) end
     end
     joined_relation = sub_relation.postfix(join_maker(lazy{joined_relation}, pred))
     where_clause = keyword[:where] >> pred
@@ -201,7 +201,7 @@ module SqlParser
       SelectRelation.new(projected, distinct, from, where, groupby, orderby)
     end
     relation = sequence(relation, (keyword[:limit] >> token(:number, &To_i)).optional) do |rel, limit|
-      case when limit.nil?: rel else LimitRelation.new(rel, limit) end
+      case when limit.nil? then rel else LimitRelation.new(rel, limit) end
     end
     relation = relation.infixl(union_maker)
   end

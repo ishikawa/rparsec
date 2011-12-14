@@ -108,7 +108,8 @@ class ComparePredicate < Predicate
     "#{left} #{op_name} #{right}"
   end
   def op_name
-    case op when :"!=": "<>" else op.to_s end
+    case op when "!=" then "<>" 
+    else op.to_s end
   end
 end
 class CompoundPredicate < Predicate
@@ -263,6 +264,6 @@ end
 class UnionRelation < Relation
   def_readable :left, :all, :right
   def to_s
-    "#{left} union #{case when all: 'all ' else '' end}#{right}"
+    "#{left} union #{case when all then 'all ' else '' end}#{right}"
   end
 end
