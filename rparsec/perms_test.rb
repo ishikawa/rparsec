@@ -28,7 +28,6 @@ class TestPTree < Test::Unit::TestCase
     ptree.add "elem3"
 
     assert_equal 3, ptree.num_elems()
-  end 
+  end
      
-
 end 

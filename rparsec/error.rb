@@ -1,4 +1,4 @@
-require 'rparsec/misc'
+require_relative 'misc'
 
 module RParsec
 

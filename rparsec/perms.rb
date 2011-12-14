@@ -1,3 +1,5 @@
+require_relative 'parser'
+
 module RParsec
 
   class PTree
@@ -44,8 +46,9 @@ module RParsec
       @elem   = elem
       @ptree  = ptree 
     end
-
   end
 
-
+  class PermutationPaser < Parser
+    
+  end 
 end 
