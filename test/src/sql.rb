@@ -108,7 +108,7 @@ class ComparePredicate < Predicate
     "#{left} #{op_name} #{right}"
   end
   def op_name
-    case op when "!=" then "<>" 
+    case op when :!= then "<>" 
     else op.to_s end
   end
 end

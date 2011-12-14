@@ -89,7 +89,7 @@ class FullParserTest < ParserTestCase
       parser.parse('3*case when (1==0 and 1==1) then 1 when 1==1 : 2 end')
       fail('should have failed')
       rescue ParserException => e
-        assert(e.message.include?(': expected, then at line 1, col 42'))
+        assert(e.message.include?('keyword:then expected, : at line 1, col 46.'))
     end
   end
 end

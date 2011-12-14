@@ -136,10 +136,10 @@ class SimpleParserTest < ParserTestCase
   def testAmong
     assertParser('abc', ?a, among(?b, ?a))
     assertParser('abc', ?a, among('ba'))
-    assertError('abc', "one of [98, 99] expected", among(?b,?c))
+    assertError('abc', "one of [b, c] expected", among(?b,?c))
   end
   def testNotAmong
-    assertError('abc', "one of [98, 97] unexpected", not_among(?b, ?a))
+    assertError('abc', "one of [b, a] unexpected", not_among(?b, ?a))
     assertParser('abc', ?a, not_among(?b,?c))
   end
   def testGetIndex
@@ -312,7 +312,7 @@ class SimpleParserTest < ParserTestCase
   def testWhitespaces
     assertParser('   ', ?\s, whitespaces)
     assertParser("\n\t", ?\t, whitespaces)
-    assertError("\n \tabc ", "whitespace(s) expected, 'a' at line 2, col 3.", whitespaces >> whitespaces, 3)
+    assertError("\n \tabc ", "whitespace(s) expected, a at line 2, col 3.", whitespaces >> whitespaces, 3)
   end
   def testCommentLineWithLexeme
    assertParser('#abc', nil, comment_line('#'))
