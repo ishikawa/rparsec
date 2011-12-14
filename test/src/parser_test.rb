@@ -1,10 +1,10 @@
-require 'import'
-require 'rubyunit'
+require_relative 'import'
+require 'test/unit'
 import :parsers, :functors
 
 include RParsec
 
-class ParserTestCase < RUNIT::TestCase
+class ParserTestCase < Test::Unit::TestCase
   include Functors
   include Parsers
   def assertParser(code, expected, parser)
