@@ -1,4 +1,4 @@
-require 'import'
+require_relative 'import'
 import :misc
 
 include RParsec

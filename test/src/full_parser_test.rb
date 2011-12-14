@@ -1,6 +1,6 @@
-require 'import'
+require_relative 'import'
 import :parsers, :keywords, :operators, :functors, :expressions
-require 'parser_test'
+require_relative  'parser_test'
 
 class FullParserTest < ParserTestCase
   def calculate_simple_cases(val, cases, default)
