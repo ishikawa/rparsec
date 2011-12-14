@@ -8,6 +8,7 @@ module Functors
   Idn = proc {|*x|x}
   Neg = proc {|x|-x}
   Inc = proc {|x|x+1}
+  Succ = proc {|x|x.succ}
   Dec = proc {|x|x-1}
   Plus = proc {|x,y|x+y}
   Minus = proc {|x,y|x-y}
