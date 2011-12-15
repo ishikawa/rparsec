@@ -10,6 +10,7 @@ class CodeLocator
   LF = ?\n
   
   def locate(ind)
+    p ind if code == "ab\nc"
     return _locateEof if ind >= code.length
     line, col = 1,1
     return line,col if ind<=0
@@ -27,7 +28,7 @@ class CodeLocator
   def _locateEof
     line, col = 1, 1
     code.each_byte do |c|
-      if c == LF
+      if c.chr == LF
         line, col = line+1, 1 
       else
         col = col+1
