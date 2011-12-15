@@ -75,7 +75,7 @@ class SimpleParserTest < ParserTestCase
   def testSequence
     assertParser('abc', ?c, sequence(char(?a),char('b'),char('c')))
     a = ?a
-    relative = proc {|c|(c.ord - a.ord).chr}
+    relative = proc {|c|(c.ord - a.ord)}
     parser = sequence(
       char('c').map(&relative), 
       char('b').map(&relative), 
