@@ -1,4 +1,4 @@
-require 'rparsec/parser'
+require_relative 'parser'
 
 module RParsec
 
@@ -372,7 +372,7 @@ class AreParser < Parser
 end
 
 def downcase c
-  case when c >= ?A && c <=?Z then c + (?a - ?A) else c end
+  case when c >= ?A && c <=?Z then (c.ord + (?a.ord - ?A.ord)).chr else c end
 end
 
 class StringCaseInsensitiveParser < Parser
@@ -611,12 +611,19 @@ class GetIndexParser < Parser
     ctxt.retn(ctxt.index)
   end
 end
+
 class SetIndexParser < Parser
   init :index
   def _parse ctxt
     ctxt.index = @index
   end
 end
+
+class PermutationParser < Parser
+  class Choice 
+    
+  end
+end 
 
 Nil = ValueParser.new(nil)
 

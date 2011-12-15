@@ -8,6 +8,7 @@ module Functors
   Idn = proc {|*x|x}
   Neg = proc {|x|-x}
   Inc = proc {|x|x+1}
+  Succ = proc {|x|x.succ}
   Dec = proc {|x|x-1}
   Plus = proc {|x,y|x+y}
   Minus = proc {|x,y|x-y}
@@ -86,7 +87,7 @@ module Functors
   
   #
   # Create a Proc that's curriable.
-  # When curried, parameters are passed in from right to left.
+  # When reverse_curried, parameters are passed in from right to left.
   # i.e. reverse_curry(closure).call(a).call(b) is quivalent to closure.call(b,a) .
   # _block_ is encapsulated under the hood to perform the actual
   # job when currying is done.
@@ -101,7 +102,7 @@ module Functors
   # Uncurry a curried closure.
   #
   def uncurry(&block)
-    return block unless block.arity == 1
+    return block unless block.arity == 1 || block.arity == -1
     proc do |*args|
       result = block
       args.each do |a|
@@ -115,7 +116,7 @@ module Functors
   # Uncurry a reverse curried closure.
   # 
   def reverse_uncurry(&block)
-    return block unless block.arity == 1
+    return block unless block.arity == 1 || block.arity == -1
     proc do |*args|
       result = block
       args.reverse_each do |a|

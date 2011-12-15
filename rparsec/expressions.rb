@@ -1,4 +1,4 @@
-require 'rparsec/parser'
+require_relative 'parser'
 
 module RParsec
   

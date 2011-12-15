@@ -1,5 +1,5 @@
-require 'import'
-require 'runit/testcase'
+require_relative 'import'
+require 'test/unit'
 import :parsers, :functors
 
 include RParsec
@@ -10,7 +10,7 @@ class Method
   include FunctorMixin
 end
     
-class FunctorTestCase < RUNIT::TestCase
+class FunctorTestCase < Test::Unit::TestCase
   include Functors
   def verify(expected, f, *args)
     assert_equal(expected, f.call(*args))
