@@ -58,11 +58,11 @@ class SimpleParserTest < ParserTestCase
   end
   def testIs
     assertParser('abc', ?a, is(?a))
-    assertError('abc', '98 expected', is(?b))
+    assertError('abc', 'b expected', is(?b))
   end
   def testIsnt
     assertParser('abc', ?a, isnt(?b))
-    assertError('abc', '97 unexpected', isnt(?a))
+    assertError('abc', 'a unexpected', isnt(?a))
     assertError('abc', "'b' unexpected", not_char(?b) >> not_char('b'), 1)
   end
   def testCharAndEof
